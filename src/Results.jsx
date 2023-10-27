@@ -11,6 +11,7 @@ const Results = ({ pets }) => {
             key={pet.id}
             animal={pet.animal}
             breed={pet.breed}
+            id={pet.id}
             images={pet.images}
             location={`${pet.city}, ${pet.state}`}
             name={pet.name}
