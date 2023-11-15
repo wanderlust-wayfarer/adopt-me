@@ -10,6 +10,6 @@
 
 @layer utilities {
   .grayed-out-disable {
-    @apply disabled: opacity-50;
+    @apply disabled:opacity-50;
   }
 }
