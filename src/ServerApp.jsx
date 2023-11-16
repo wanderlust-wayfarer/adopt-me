@@ -7,6 +7,7 @@ function render(url, opts) {
     <StaticRouter location={url}>
       <App />
     </StaticRouter>,
+    opts,
   );
 
   return stream;
