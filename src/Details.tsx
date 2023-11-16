@@ -10,15 +10,17 @@ import { PetAPIResponse } from "./APIResponsesTypes";
 const Modal = lazy(() => import("./Modal"));
 
 const Details = () => {
-  const navigate = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setAdoptedPet] = useContext(AdoptedPetContext);
-  const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
+
   if (!id) {
     throw new Error("Details.tsx: no id was provided");
   }
+
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const results = useQuery<PetAPIResponse>(["details", id], fetchPet);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setAdoptedPet] = useContext(AdoptedPetContext);
 
   if (results.isError) {
     return <h2>Error loading content</h2>;
@@ -33,8 +35,9 @@ const Details = () => {
   }
 
   const pet = results?.data?.pets[0];
+
   if (!pet) {
-    throw new Error("Details.tsx: pet results are undefined");
+    throw new Error("Details.tsx: pet not found");
   }
 
   console.info(pet.images[1]);

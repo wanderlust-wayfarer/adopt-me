@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AdoptedPetContext from "./AdoptedPetContext";
+import { Pet } from "./APIResponsesTypes";
 
 const Details = lazy(() => import("./Details"));
 const SearchParams = lazy(() => import("./SearchParams"));
@@ -9,7 +10,7 @@ const SearchParams = lazy(() => import("./SearchParams"));
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      startTime: Infinity,
+      staleTime: Infinity,
       cacheTime: Infinity,
       // requires node 18 or `--experimental-fetch` in node 16
       // preforms a server-side fetch to prehydrate results from pets API
@@ -19,7 +20,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const adoptedPet = useState(null);
+  const adoptedPet = useState(null as Pet | null);
 
   return (
     <QueryClientProvider client={queryClient}>
