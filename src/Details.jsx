@@ -1,11 +1,10 @@
 import { useState, lazy } from "react";
 import { useParams, useNavigate } from "react-router";
-import { useQuery } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
+import { useGetPetQuery } from "./petApiService";
 import { adopt } from "./adoptedPetSlice";
 import ErrorBoundary from "./ErrorBoundary";
 import Carousel from "./Carousel";
-import fetchPet from "./fetchPet";
 
 const Modal = lazy(() => import("./Modal"));
 
@@ -13,24 +12,16 @@ const Details = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
-  const results = useQuery(["details", id], fetchPet);
+  const { isLoading, data: pet } = useGetPetQuery(id);
   const dispatch = useDispatch();
 
-  if (results.isError) {
-    return <h2>Error loading content</h2>;
-  }
-
-  if (results.isLoading) {
+  if (isLoading) {
     return (
       <div className="loading-pane">
         <h2 className="loader">꩜</h2>
       </div>
     );
   }
-
-  const pet = results.data.pets[0];
-
-  console.info(pet.images[1]);
 
   return (
     <div className="details">
