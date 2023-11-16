@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "build vite",
+    "build:client": "vite build --outDir ../dist/client --emptyOutDir",
+    "build:server": "vite build --outDir ../dist/server --ssr ServerApp.jsx --emptyOutDir",
+    "build": "npm run build:client && npm run build:server",
+    "start": "node server.js",
     "dev": "vite",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
@@ -22,11 +26,12 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.7.1",
+    "prettier": "^3.1.0",
     "vite": "^3.1.4"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.10.1",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1"
