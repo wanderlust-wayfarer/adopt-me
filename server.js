@@ -8,6 +8,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PORT = process.env.PORT || 3001;
 
+// TODO: if we want the results available at any time
+// write a hydration method that queries the API every 5 minutes and caches the results
+// then check cache first in React app
+
 const html = fs
   .readFileSync(path.resolve(__dirname, "./dist/client/index.html"))
   .toString();

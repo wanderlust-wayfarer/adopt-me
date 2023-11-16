@@ -11,6 +11,9 @@ const queryClient = new QueryClient({
     queries: {
       startTime: Infinity,
       cacheTime: Infinity,
+      // requires node 18 or `--experimental-fetch` in node 16
+      // preforms a server-side fetch to prehydrate results from pets API
+      suspense: true,
     },
   },
 });
