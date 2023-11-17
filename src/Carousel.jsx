@@ -21,7 +21,7 @@ class Carousel extends Component {
 
     return (
       <div className="carousel">
-        <img src={images[active]} alt="animal hero" />
+        <img src={images[active]} alt="animal hero" data-testid="hero" />
         <div className="carousel-smaller">
           {images.map((photo, index) => (
             // eslint-disable-next-line
@@ -31,6 +31,7 @@ class Carousel extends Component {
               className={index === active ? "active" : ""}
               data-index={index}
               src={photo}
+              data-testid={`thumbnail${index}`}
               onClick={this.handleIndexClick}
             />
           ))}
